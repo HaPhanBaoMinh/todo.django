@@ -4,6 +4,7 @@ import { Login } from "../pages/Login";
 
 const authRouter = [
     { path: "/home", component: Home, layout: null },
+    { path: "/important", component: Home, layout: null },
 ]
 
 const publicRouter = [

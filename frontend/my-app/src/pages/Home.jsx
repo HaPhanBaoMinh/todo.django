@@ -2,12 +2,12 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import ROUTER from "../api/server";
 import AuthContext from "../context/AuthContext";
+import SidebarContext from "../context/SidebarContext";
 
 export const Home = () => {
   const { logoutUser, Auth, tokens } = useContext(AuthContext);
   const [notes, setNotes] = useState([])
-  // "Content-Type": "application/json",
-  //         "Authorization": `Bearer ${tokens.access}`
+  const { isOpenSideBar, onToggleSideBar } = useContext(SidebarContext);
 
   useEffect(() => {
     getNotes()
@@ -29,7 +29,7 @@ export const Home = () => {
   }
 
   return (
-    <div className="w-full h-full p-10"> 
+    <div className="w-full h-full p-10">
       <h1 className="text-3xl font-bold">Welcomeback! {Auth.username}</h1>
       <button onClick={(e) => logoutUser(e)} className="py-1 px-4 font-medium text-white bg-blue-400 rounded-md text-xl" >Logout</button>
 

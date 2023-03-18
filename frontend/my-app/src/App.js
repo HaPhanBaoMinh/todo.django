@@ -12,58 +12,61 @@ import AuthContext, { AuthProvider } from "./context/AuthContext";
 import { redirect } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { SidebarProvider } from "./context/SidebarContext";
 
 function App() {
   const { Auth } = useContext(AuthContext);
 
   return (
     <div className="App m-auto">
-        <Routes>
-          {authRouter.map((router, index) => {
-            let Page = router.component;
-            let Layout = DefaultLayout;
-            if (router.layout) {
-              Layout = router.layout;
-            }
+      <Routes>
+        {authRouter.map((router, index) => {
+          let Page = router.component;
+          let Layout = DefaultLayout;
+          if (router.layout) {
+            Layout = router.layout;
+          }
 
-            return (
-              <Route
-                path={router.path}
-                key={index}
-                element={
-                  !Auth ? (
-                    <Navigate to="/login" />
-                  ) : (
+          return (
+            <Route
+              path={router.path}
+              key={index}
+              element={
+                !Auth ? (
+                  <Navigate to="/login" />
+                ) : (
+                  <SidebarProvider>
                     <Layout>
                       <Page />
                     </Layout>
-                  )
-                }
-              />
-            );
-          })}
+                  </SidebarProvider>
+                )
+              }
+            />
+          );
+        })}
 
-          {publicRouter.map((router, index) => {
-            const Page = router.component;
-            let Layout = DefaultLayout;
+        {publicRouter.map((router, index) => {
+          const Page = router.component;
+          let Layout = DefaultLayout;
 
-            if (router.layout) {
-              Layout = router.layout;
-            }
+          if (router.layout) {
+            Layout = router.layout;
+          }
 
-            return (
-              <Route
-                path={router.path}
-                key={index}
-                element={
-                  <Layout>
-                    <Page />
-                  </Layout>
-                }
-              />
-            );
-          })}
-        </Routes>
+          return (
+            <Route
+              path={router.path}
+              key={index}
+              element={
+                <Layout>
+                  <Page />
+                </Layout>
+              }
+            />
+          );
+        })}
+      </Routes>
       <ToastContainer />
     </div>
   );

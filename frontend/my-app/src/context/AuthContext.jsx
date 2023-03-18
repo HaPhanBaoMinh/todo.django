@@ -53,7 +53,7 @@ export const AuthProvider = ({ children }) => {
 
   const updateToken = async (refreshToken) => {
     console.log("Update tokens");
-    if(!refreshToken) return logoutUser();
+    if (!refreshToken) return logoutUser();
     try {
       const body = {
         refresh: refreshToken,
@@ -62,7 +62,7 @@ export const AuthProvider = ({ children }) => {
       const data = await response.data;
 
       setAuth(jwt_decode(data.access));
-      setTokens(tokens => ({...tokens, access: data.access}));
+      setTokens(tokens => ({ ...tokens, access: data.access }));
       const newTokens = JSON.parse(localStorage.getItem("tokens"));
       newTokens.access = data.access;
       localStorage.setItem("tokens", JSON.stringify(newTokens));
@@ -74,11 +74,11 @@ export const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    let interval =  setInterval(() => {
+    let interval = setInterval(() => {
       if (tokens) {
         updateToken(tokens.refresh);
       }
-    }, 1000 * 4);
+    }, 1000 * 60 * 4);
     return () => clearInterval(interval);
   }, [tokens, isLoading]);
 
