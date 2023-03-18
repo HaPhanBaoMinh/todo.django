@@ -64,7 +64,7 @@ export const Sidebar = ({ onCloseSidebar }) => {
                             <Link to={taskListItem.path}>
                                 <div key={uuidv4()} className={
                                     `w-ful py-3 flex justify-between pl-10 pr-5 cursor-pointer
-                                 hover:bg-[#e4e4e47d] transition-all ${activeId === taskListItem.id ? "bg-[#0e5e6f47]" : ""}`
+                                 hover:bg-[#e4e4e47d] transition-all ${activeId === taskListItem.id ? "bg-[#0e5e6f47] border-l-4 border-[#3A8891]" : ""}`
                                 }>
                                     {/* Task content */}
                                     <div className="w-[90%] flex gap-3 items-center">
