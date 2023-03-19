@@ -132,8 +132,12 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'nettruyen',
+        'USER': 'vietdev',
+        'PASSWORD': 'w9BlvthHgzA3V0SLnxitgwEI6pLymaKZ',
+        'HOST': 'dpg-cgbihvhmbg55nqmhf1n0-a.singapore-postgres.render.com',
+        'PORT': '',
     }
 }
 

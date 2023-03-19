@@ -133,6 +133,21 @@ def update_task_importance(request, task_id):
 @permission_classes([IsAuthenticated])
 def getCategory(request):
     user = request.user
-    notes = user.category_set.all()
-    serializer = CategorySerializer(notes, many=True)
+    category = user.category_set.all()
+    serializer = CategorySerializer(category, many=True)
     return Response(serializer.data)
+
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def delete_task(request, task_id):
+    user = request.user
+    try:
+        task = Task.objects.get(id=task_id, user=user)
+        task.delete()
+        Response({"message": "Task deleted"}, status=status.HTTP_200_OK)
+    except Task.DoesNotExist:
+        Response({"message": "Task does not exist"}, status=status.HTTP_400_BAD_REQUEST)
+    except Exception as e:
+        Response({"message": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    
